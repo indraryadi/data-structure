@@ -1,26 +1,40 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"os/exec"
 	"strconv"
 )
 
 func show(tasks []string) {
+	fmt.Println("SHOW TASK")
 	for i, v := range tasks {
 		fmt.Printf("%d.%s\n", i+1, v)
 	}
 }
 
 func add(tasks []string) []string {
+	fmt.Println("ADD TASK")
+	// get user input
 	var newTask string
-	fmt.Printf("add task:")
-	fmt.Scanln(&newTask)
-	tasks = append(tasks, newTask) //it will not work bc using append will will create new slice not modify the original value of slice
+	fmt.Printf("task:")
+	userInput := bufio.NewScanner(os.Stdin)
+	if !userInput.Scan() {
+		fmt.Println("error reading input:", userInput.Err())
+	}
+	newTask = userInput.Text()
+
+	// add user input into slice
+	tasks = append(tasks, newTask)
 	fmt.Println(newTask + " added to tasks")
 	return tasks
 }
 func edit(tasks []string) []string {
+	fmt.Println("EDIT TASK")
 	show(tasks)
+	// select index that want to edit
 	var index string
 	fmt.Println("select no of task:")
 	fmt.Scanln(&index)
@@ -33,17 +47,23 @@ func edit(tasks []string) []string {
 		fmt.Println("wrong number")
 	}
 
+	// update value of selected index
 	var updateTask string
 	fmt.Println("input update task:")
-	fmt.Scanln(&updateTask)
-
+	userInput := bufio.NewScanner(os.Stdin)
+	if !userInput.Scan() {
+		fmt.Println("error reading input:", userInput.Err())
+	}
+	updateTask = userInput.Text()
 	tasks[indexConv] = updateTask
 	return tasks
 }
 
 func delete(tasks []string) []string {
+	fmt.Println("DELETE TASK")
 	show(tasks)
 	var index string
+	// select index of task that want to delete
 	fmt.Println("select no of task:")
 	fmt.Scanln(&index)
 	deletedIndex, err := strconv.Atoi(index)
@@ -67,32 +87,38 @@ func delete(tasks []string) []string {
 	return tasks
 }
 
+func clearScreen(name string) {
+	cmd := exec.Command(name)
+	cmd.Stdout = os.Stdout
+	cmd.Run()
+}
 func main() {
-	// task list
-	// functionality:
-	// 1.add task
-	// 2.edit task
-	// 3.delete task
-	// 4.show all task
-
 	var tasks []string
-	tasks = append(tasks, "good")
-	tasks = append(tasks, "notgood")
-	tasks = append(tasks, "ggwp")
-	tasks = append(tasks, "well")
-	tasks = append(tasks, "enough")
 
-	// fmt.Printf("tasks:\n1.Show tasks\n2.Add task\n3.Edit task\n4.Delete task\n")
+	var menu int
 
-	show(tasks)
+	for loop := true; loop; {
+		fmt.Printf("menu:\n1.Show tasks\n2.Add task\n3.Edit task\n4.Delete task\n5.Exit\n")
+		fmt.Println("select menu (1-4):")
+		fmt.Scanln(&menu)
 
-	tasks = add(tasks)
-	show(tasks)
-
-	tasks = edit(tasks)
-	show(tasks)
-
-	tasks = delete(tasks)
-	show(tasks)
+		switch menu {
+		case 1:
+			clearScreen("clear")
+			show(tasks)
+		case 2:
+			clearScreen("clear")
+			tasks = add(tasks)
+		case 3:
+			clearScreen("clear")
+			tasks = edit(tasks)
+		case 4:
+			clearScreen("clear")
+			tasks = delete(tasks)
+		default:
+			loop = false
+			break
+		}
+	}
 
 }
