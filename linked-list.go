@@ -26,10 +26,8 @@ func (list *List) Insert(musicName string) {
 	}
 
 	if list.Head == nil {
-		// fmt.Println("head is nil")
 		list.Head = newNode
 	} else {
-		// fmt.Println("head is not nil")
 		previousNode := list.Head
 		for previousNode.Next != nil {
 			previousNode = previousNode.Next
@@ -42,14 +40,9 @@ func Show(list *List) {
 	fmt.Println("SHOW")
 	previous := list.Head
 	if previous.Next == nil {
-		// fmt.Println("only has 1 data")
 		fmt.Printf("%v ->\n", previous.MusicName)
 	} else {
-		fmt.Println("have more than 1 data")
 		for previous.Next != nil {
-			// fmt.Println("LOOP")
-			// fmt.Println(*&previous.MusicName)
-			// fmt.Println(*&previous.Next.MusicName)
 			fmt.Printf("%v ->", *&previous.MusicName)
 			previous = previous.Next
 		}
@@ -58,9 +51,8 @@ func Show(list *List) {
 }
 
 func main() {
-	fmt.Println("hello")
+	fmt.Println("LINKED LIST")
 	list := &List{}
-	fmt.Println(list)
 
 	list.Insert("goose")
 	Show(list)
