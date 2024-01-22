@@ -12,6 +12,7 @@ type List struct {
 	Length int
 }
 
+// add data into last list
 func (list *List) Append(musicName string) {
 	// step
 	// create new list
@@ -27,15 +28,12 @@ func (list *List) Append(musicName string) {
 	}
 
 	if list.Head == nil {
-		fmt.Println("list nil")
 		list.Head = newNode
 		list.Length += 1
 		fmt.Println(list.Length)
 	} else {
-		fmt.Println("list not nil")
 		previousNode := list.Head
 		for previousNode.Next != nil {
-			fmt.Println("add to nil")
 			previousNode = previousNode.Next
 		}
 		previousNode.Next = newNode
@@ -59,6 +57,7 @@ func Show(list *List) {
 	fmt.Println(list.Length)
 }
 
+// add data into first list
 func (list *List) Prepend(musicName string) {
 	fmt.Println("PREPEND")
 	newNode := &Node{
@@ -77,25 +76,92 @@ func (list *List) Prepend(musicName string) {
 	fmt.Println(list.Length)
 }
 
-// func (list *List) Insert(index int, musicName string) {
-// 	if index >= len(list.Length) {
+// insert data at any index
+func (list *List) Insert(index int, musicName string) {
+	fmt.Println("INSERT")
+	fmt.Println(list.Length)
+	if index > list.Length {
+		fmt.Println("out of index")
+	} else if index == 0 {
+		fmt.Println("add into first")
+		list.Prepend(musicName)
+		fmt.Println("done insert")
+	} else if index == list.Length {
+		fmt.Println("add into last")
+		list.Append(musicName)
+		fmt.Println("done insert")
+	} else {
+		fmt.Println("add not into middle")
+		newNode := &Node{
+			MusicName: musicName,
+			Next:      nil,
+		}
+		node := list.Head
+		var count int
+		// index := 3
+		// fmt.Println(count)
+		// fmt.Println("start")
+		for node.Next != nil {
+			// fmt.Println("current node: " + node.MusicName)
+			// fmt.Println(count)
+			if count == index-1 {
+				// fmt.Println("match index")
+				// Show(list)
+				// fmt.Println("current node: " + node.MusicName)
+				// fmt.Println("next node: " + node.Next.MusicName)
+				newNode.Next = node.Next
+				node.Next = newNode
+				list.Length += 1
+				break
+			}
+			node = node.Next
+			count += 1
+		}
+		// fmt.Println("done insert")
+	}
 
-// 	}
-// }
+}
 
 func main() {
 	fmt.Println("LINKED LIST")
 	list := &List{}
 
 	list.Append("goose")
-	Show(list)
+	// Show(list)
 
 	list.Append("up into the ether")
 	list.Append("gravity")
 	list.Append("slow dancing in the burning room")
+	list.Prepend("pyscosocial")
 	list.Append("who you are")
 	Show(list)
+	fmt.Println("====")
 
-	list.Prepend("pyscosocial")
+	// newNode := &Node{
+	// 	MusicName: "middle music",
+	// 	Next:      nil,
+	// }
+	// node := list.Head
+	// var count int
+	// index := 3
+	// fmt.Println(count)
+	// fmt.Println("start")
+	// for node.Next != nil {
+	// 	fmt.Println("current node: " + node.MusicName)
+	// 	fmt.Println(count)
+	// 	if count == index-1 {
+	// 		fmt.Println("match index")
+	// 		Show(list)
+	// 		fmt.Println("current node: " + node.MusicName)
+	// 		fmt.Println("next node: " + node.Next.MusicName)
+	// 		newNode.Next = node.Next
+	// 		node.Next = newNode
+	// 		break
+	// 	}
+	// 	node = node.Next
+	// 	count += 1
+	// }
+
+	list.Insert(1, "NEW MUSIC")
 	Show(list)
 }
