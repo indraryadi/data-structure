@@ -8,7 +8,8 @@ type Node struct {
 }
 
 type List struct {
-	Head *Node
+	Head   *Node
+	Length int
 }
 
 func (list *List) Append(musicName string) {
@@ -26,13 +27,20 @@ func (list *List) Append(musicName string) {
 	}
 
 	if list.Head == nil {
+		fmt.Println("list nil")
 		list.Head = newNode
+		list.Length += 1
+		fmt.Println(list.Length)
 	} else {
+		fmt.Println("list not nil")
 		previousNode := list.Head
 		for previousNode.Next != nil {
+			fmt.Println("add to nil")
 			previousNode = previousNode.Next
 		}
 		previousNode.Next = newNode
+		list.Length += 1
+		fmt.Println(list.Length)
 	}
 }
 
@@ -48,6 +56,7 @@ func Show(list *List) {
 		}
 		fmt.Printf("%v ->\n", previous.MusicName)
 	}
+	fmt.Println(list.Length)
 }
 
 func (list *List) Prepend(musicName string) {
@@ -64,7 +73,16 @@ func (list *List) Prepend(musicName string) {
 		list.Head = newNode
 		list.Head.Next = previousNode
 	}
+	list.Length += 1
+	fmt.Println(list.Length)
 }
+
+// func (list *List) Insert(index int, musicName string) {
+// 	if index >= len(list.Length) {
+
+// 	}
+// }
+
 func main() {
 	fmt.Println("LINKED LIST")
 	list := &List{}
