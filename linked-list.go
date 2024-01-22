@@ -135,6 +135,21 @@ func (list *List) Delete(index int) {
 		fmt.Println("done delete")
 	} else {
 		fmt.Println("delete from middle")
+		node := list.Head
+		var count int
+		for node.Next != nil {
+			if count == index-2 {
+				fmt.Println("found")
+				fmt.Println(node.MusicName)
+				fmt.Println(node.Next.MusicName)
+				// newNode.Next = node.Next
+				node.Next = node.Next.Next
+				list.Length -= 1
+				break
+			}
+			node = node.Next
+			count += 1
+		}
 	}
 }
 
@@ -156,6 +171,6 @@ func main() {
 	list.Insert(1, "NEW MUSIC")
 	Show(list)
 
-	list.Delete(7)
+	list.Delete(2)
 	Show(list)
 }
