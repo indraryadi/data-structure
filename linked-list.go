@@ -11,7 +11,7 @@ type List struct {
 	Head *Node
 }
 
-func (list *List) Insert(musicName string) {
+func (list *List) Append(musicName string) {
 	// step
 	// create new list
 	// check if current list head is nil, use newList as Head
@@ -19,7 +19,7 @@ func (list *List) Insert(musicName string) {
 	// loop through list to get the last node,
 	// by check if next node is not nil (nil indicate current node is node last node) change value of previousNode into Next value of previous node
 	// after got last node, fill that node last value using newNode
-	fmt.Println("INSERT")
+	fmt.Println("APPEND")
 	newNode := &Node{
 		MusicName: musicName,
 		Next:      nil,
@@ -50,16 +50,34 @@ func Show(list *List) {
 	}
 }
 
+func (list *List) Prepend(musicName string) {
+	fmt.Println("PREPEND")
+	newNode := &Node{
+		MusicName: musicName,
+		Next:      nil,
+	}
+
+	if list.Head == nil {
+		list.Head = newNode
+	} else {
+		previousNode := list.Head
+		list.Head = newNode
+		list.Head.Next = previousNode
+	}
+}
 func main() {
 	fmt.Println("LINKED LIST")
 	list := &List{}
 
-	list.Insert("goose")
+	list.Append("goose")
 	Show(list)
 
-	list.Insert("up into the ether")
-	list.Insert("gravity")
-	list.Insert("slow dancing in the burning room")
-	list.Insert("who you are")
+	list.Append("up into the ether")
+	list.Append("gravity")
+	list.Append("slow dancing in the burning room")
+	list.Append("who you are")
+	Show(list)
+
+	list.Prepend("pyscosocial")
 	Show(list)
 }
