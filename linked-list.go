@@ -98,7 +98,8 @@ func (list *List) Insert(index int, musicName string) {
 		node := list.Head
 		var count int
 		for node.Next != nil {
-			if count == index-1 {
+			if count == index-2 {
+				fmt.Println(node.MusicName)
 				newNode.Next = node.Next
 				node.Next = newNode
 				list.Length += 1
@@ -139,9 +140,9 @@ func (list *List) Delete(index int) {
 		var count int
 		for node.Next != nil {
 			if count == index-2 {
-				fmt.Println("found")
-				fmt.Println(node.MusicName)
-				fmt.Println(node.Next.MusicName)
+				// fmt.Println("found")
+				// fmt.Println(node.MusicName)
+				// fmt.Println(node.Next.MusicName)
 				// newNode.Next = node.Next
 				node.Next = node.Next.Next
 				list.Length -= 1
@@ -154,7 +155,22 @@ func (list *List) Delete(index int) {
 }
 
 // update
-
+func (list *List) Update(selectName string, newName string) {
+	fmt.Println("UPDATE DATA")
+	prev := list.Head
+	curr := prev
+	for i := 0; i < list.Length; i++ {
+		if curr.MusicName == selectName {
+			curr.MusicName = newName
+			break
+		}
+		// fmt.Println(curr.MusicName)
+		if curr.Next != nil {
+			prev = curr
+			curr = curr.Next
+		}
+	}
+}
 func main() {
 	fmt.Println("LINKED LIST")
 	list := &List{}
@@ -165,12 +181,15 @@ func main() {
 	list.Append("slow dancing in the burning room")
 	list.Prepend("pyscosocial")
 	list.Append("who you are")
-	Show(list)
-	fmt.Println("====")
+	// Show(list)
+	// fmt.Println("====")
 
-	list.Insert(1, "NEW MUSIC")
+	list.Insert(3, "NEW MUSIC")
+	// Show(list)
+
+	list.Delete(2) //later change it into musicName not index
 	Show(list)
 
-	list.Delete(2)
+	list.Update("gravity", "NEWNEWNEW")
 	Show(list)
 }
