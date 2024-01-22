@@ -79,7 +79,6 @@ func (list *List) Prepend(musicName string) {
 // insert data at any index
 func (list *List) Insert(index int, musicName string) {
 	fmt.Println("INSERT")
-	fmt.Println(list.Length)
 	if index > list.Length {
 		fmt.Println("out of index")
 	} else if index == 0 {
@@ -98,17 +97,8 @@ func (list *List) Insert(index int, musicName string) {
 		}
 		node := list.Head
 		var count int
-		// index := 3
-		// fmt.Println(count)
-		// fmt.Println("start")
 		for node.Next != nil {
-			// fmt.Println("current node: " + node.MusicName)
-			// fmt.Println(count)
 			if count == index-1 {
-				// fmt.Println("match index")
-				// Show(list)
-				// fmt.Println("current node: " + node.MusicName)
-				// fmt.Println("next node: " + node.Next.MusicName)
 				newNode.Next = node.Next
 				node.Next = newNode
 				list.Length += 1
@@ -117,18 +107,44 @@ func (list *List) Insert(index int, musicName string) {
 			node = node.Next
 			count += 1
 		}
-		// fmt.Println("done insert")
 	}
-
 }
+
+// delete
+func (list *List) Delete(index int) {
+	fmt.Println("DELETE")
+	if index > list.Length {
+		fmt.Println("out of index")
+	} else if index == 0 {
+		fmt.Println("delete first")
+		head := list.Head
+		list.Head = head.Next
+		head.Next = nil
+		list.Length -= 1
+		fmt.Println("done delete")
+	} else if index == list.Length {
+		fmt.Println("delete last")
+		prev := list.Head
+		for prev.Next.Next != nil {
+			fmt.Println(prev.MusicName)
+			prev = prev.Next
+		}
+		fmt.Println(prev.MusicName)
+		prev.Next = nil
+		list.Length -= 1
+		fmt.Println("done delete")
+	} else {
+		fmt.Println("delete from middle")
+	}
+}
+
+// update
 
 func main() {
 	fmt.Println("LINKED LIST")
 	list := &List{}
 
 	list.Append("goose")
-	// Show(list)
-
 	list.Append("up into the ether")
 	list.Append("gravity")
 	list.Append("slow dancing in the burning room")
@@ -137,31 +153,9 @@ func main() {
 	Show(list)
 	fmt.Println("====")
 
-	// newNode := &Node{
-	// 	MusicName: "middle music",
-	// 	Next:      nil,
-	// }
-	// node := list.Head
-	// var count int
-	// index := 3
-	// fmt.Println(count)
-	// fmt.Println("start")
-	// for node.Next != nil {
-	// 	fmt.Println("current node: " + node.MusicName)
-	// 	fmt.Println(count)
-	// 	if count == index-1 {
-	// 		fmt.Println("match index")
-	// 		Show(list)
-	// 		fmt.Println("current node: " + node.MusicName)
-	// 		fmt.Println("next node: " + node.Next.MusicName)
-	// 		newNode.Next = node.Next
-	// 		node.Next = newNode
-	// 		break
-	// 	}
-	// 	node = node.Next
-	// 	count += 1
-	// }
-
 	list.Insert(1, "NEW MUSIC")
+	Show(list)
+
+	list.Delete(7)
 	Show(list)
 }
