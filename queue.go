@@ -13,7 +13,7 @@ func checkFull(headIndex *int, tailIndex *int, queue *[]interface{}) bool {
 	return false
 }
 func enqueue(headIndex *int, tailIndex *int, queue *[]interface{}, data interface{}) {
-	fmt.Println("enqueue: ", data)
+	fmt.Println("ENQUEUE: ", data)
 	isFull := checkFull(headIndex, tailIndex, queue)
 	if !isFull {
 		(*queue)[*tailIndex] = data
@@ -22,18 +22,18 @@ func enqueue(headIndex *int, tailIndex *int, queue *[]interface{}, data interfac
 			*tailIndex = 0
 		}
 	} else {
-		fmt.Println("full")
+		fmt.Println("QUEUE FULL")
 	}
 }
 func dequeue(headIndex *int, tailIndex *int, queue *[]interface{}) {
-	fmt.Println("dequeue", *headIndex)
+	fmt.Println("DEQUEUE", *headIndex)
 	(*queue)[*headIndex] = nil
 	*headIndex += 1
 }
 func main() {
-	// implementation queue using array
-	var headIndex int
-	var tailIndex int
+	// implementation of queue using array (fix length queue)
+	var headIndex int // this used for dequeue, when want to dequeue use this index to indicate which index need to dequeue
+	var tailIndex int // this used for enqueue, when want to enqueue use this index to indicate which index need to enqueue
 	queue := make([]interface{}, 5)
 	fmt.Println(queue)
 
