@@ -14,22 +14,14 @@ func insertData(trees *TreeNode, newNode *TreeNode) {
 	fmt.Printf("compare %d with %d\n", trees.Data, newNode.Data)
 	if newNode.Data >= trees.Data {
 		if trees.Right == nil {
-			// fmt.Println("INSERT TO RIGHT")
 			trees.Right = newNode
-			// fmt.Printf("%d => %d\n", trees.Data, trees.Right.Data)
-			// fmt.Println("DONE")
 		} else {
-			// fmt.Println("recursive")
 			insertData(trees.Right, newNode)
 		}
 	} else {
 		if trees.Left == nil {
-			// fmt.Println("INSERT TO LEFT")
 			trees.Left = newNode
-			// fmt.Printf("%d => %d\n", trees.Data, trees.Left.Data)
-			// fmt.Println("DONE")
 		} else {
-			// fmt.Println("recursive")
 			insertData(trees.Left, newNode)
 		}
 	}
@@ -39,9 +31,7 @@ func printTrees(trees *TreeNode) {
 	if trees.Left != nil {
 		printTrees(trees.Left)
 	}
-
 	fmt.Printf("%d =>", trees.Data)
-
 	if trees.Right != nil {
 		printTrees(trees.Right)
 	}

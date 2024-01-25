@@ -9,7 +9,7 @@ simple project that implement basic data structure:
 | Stack   | Develop a simple text editor with undo/redo functionality using a stack.  |&check;|
 | Queue   | Build a print queue simulation for a printer system.  |&check;|
 | Hash Table   | Create a contact management system using a hash table for quick searches.  |&check;|
-| Tree   | Implement a file system using a tree structure for directory hierarchy.  |
+| Tree   | create unbalance binary tree structure for number.  |&check;|
 | Suffix Tree   | Build a simple text autocomplete system using a suffix tree. |
 | R-tree   | Develop a location-based recommendation system using R-Tree.  |
 | Graph   | Create a social network graph for friend connections and recommendations.   |
