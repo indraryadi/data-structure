@@ -10,6 +10,7 @@ simple project that implement basic data structure:
 | Queue   | Build a print queue simulation for a printer system.  |&check;|
 | Hash Table   | Create a contact management system using a hash table for quick searches.  |&check;|
 | Tree   | create unbalance binary tree structure for number.  |&check;|
+| AVL binary Tree   | create balance binary tree structure for number.  |
 | Suffix Tree   | Build a simple text autocomplete system using a suffix tree. |
 | R-tree   | Develop a location-based recommendation system using R-Tree.  |
 | Graph   | Create a social network graph for friend connections and recommendations.   |
