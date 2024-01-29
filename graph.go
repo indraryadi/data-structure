@@ -13,7 +13,7 @@ type Graph struct {
 	Matrix [][]int
 }
 
-func printGraph(vertices *Vertices, graph *Graph) {
+func (vertices *Vertices) printGraph(graph *Graph) {
 	fmt.Printf(" ")
 	for x := range vertices.Vertices {
 		fmt.Printf(" %s", vertices.Vertices[x])
@@ -28,7 +28,7 @@ func printGraph(vertices *Vertices, graph *Graph) {
 	}
 }
 
-func addVertices(vertices *Vertices, data string) *Vertices {
+func (vertices *Vertices) addVertices(data string) *Vertices {
 	vertices.Vertices = append(vertices.Vertices, data)
 	return &Vertices{
 		Vertices: vertices.Vertices,
@@ -53,16 +53,25 @@ func checkEdge(graph *Graph, src int, dst int) bool {
 	}
 }
 
+func recomendation(graph *Graph, listUser *Vertices, user int) {
+	fmt.Printf("Friend recomendation for %s:\n", listUser.Vertices[user])
+	for otherUser, isConnected := range graph.Matrix[user] {
+		if otherUser != user && isConnected == 0 {
+			fmt.Printf("%s,", listUser.Vertices[otherUser])
+		}
+	}
+	fmt.Println()
+}
 func main() {
 	row := 4
 	col := 4
 
 	sliceOfVertices := &Vertices{}
 
-	addVertices(sliceOfVertices, "A") //0
-	addVertices(sliceOfVertices, "B") //1
-	addVertices(sliceOfVertices, "C") //2
-	addVertices(sliceOfVertices, "D") //3
+	sliceOfVertices.addVertices("A") //0
+	sliceOfVertices.addVertices("B") //1
+	sliceOfVertices.addVertices("C") //2
+	sliceOfVertices.addVertices("D") //3
 	fmt.Println(sliceOfVertices)
 
 	twoD := &Graph{
@@ -80,6 +89,7 @@ func main() {
 	addEdge(twoD, 0, 2)
 	addEdge(twoD, 0, 3)
 	addEdge(twoD, 2, 3)
-	printGraph(sliceOfVertices, twoD)
+	sliceOfVertices.printGraph(twoD)
 
+	recomendation(twoD, sliceOfVertices, 3)
 }

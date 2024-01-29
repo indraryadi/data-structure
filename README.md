@@ -11,4 +11,4 @@ simple project that implement basic data structure:
 | Hash Table   | Create a contact management system using a hash table for quick searches.  |&check;|
 | Tree   | create unbalance binary tree structure for number.  |&check;|
 | R-tree   | Develop a location-based recommendation system using R-Tree.  |
-| Graph   | Create a social network graph for friend connections and recommendations.   |
+| Graph   | Create a social network graph for friend connections and recommendations.   |&check;|
