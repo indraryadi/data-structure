@@ -76,6 +76,10 @@ func main() {
 	fmt.Println(sliceOfVertices.Vertices[1])
 	addEdge(twoD, 0, 1)
 	addEdge(twoD, 0, 1)
+	addEdge(twoD, 1, 0)
+	addEdge(twoD, 0, 2)
+	addEdge(twoD, 0, 3)
+	addEdge(twoD, 2, 3)
 	printGraph(sliceOfVertices, twoD)
 
 }
